@@ -15,25 +15,29 @@ from __future__ import division
 
 import numpy as np
 
+def even_elements_of(input_list):
+    """ Returns the even elements of a list. """
 
+    return [n for n in input_list if (n % 2 == 0)]
 
 def sum_even_fibonaccis_below_value(max_value):
-    """
+    """ Solves the above problem for any max_value. """
 
-    """
+    fibonacci_terms = [0]
 
-    # Simplest approach:
-    # Generate ALL fibonacci terms below max_value
-    #   then make a second pass summing up everything.
-    #   possibly slow?
+    current_value = 1
+    while current_value < max_value:
+        
+        fibonacci_terms.append(current_value)
+        current_value += fibonacci_terms[-2]
 
-    pass
+    return np.sum(even_elements_of(fibonacci_terms))
 
 sample_fibonaccis = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 sample_fibonaccis_even = [n for n in sample_fibonaccis if (n % 2 == 0)]
 
 assert sum_even_fibonaccis_below_value(100) == 44
 assert sum_even_fibonaccis_below_value(100) == np.sum(sample_fibonaccis_even)
-
+assert sum_even_fibonaccis_below_value(100) == np.sum(even_elements_of(sample_fibonaccis)) # implicitly a test of `even_elements_of()`.
 
 print sum_even_fibonaccis_below_value(4e6)
