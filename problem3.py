@@ -45,18 +45,28 @@ def prime_factors_of(value):
     #  and
     # is a given number PRIME?
 
-    # I think the simplest non-stupid approach is to generate all primes
-    # up to value/2, and then mod them all against `value`.
+    # I think the simplest non-stupid approach is to generate all 
+    # FACTORS OF VALUE, and then check to see which are prime!
     # actually, a cute approach would be to start from the top down
     # and just return the first one. we'll see if i need that optimization.
     # (don't optimize prematurely!)
 
-    possible_prime_factors = primes_up_to(value//2)
+    # WELP. I tried to generate all primes up to value//2! what a mistake.
+
+    factors = []
+
+    for i in range(2, value//2):
+        if value % i == 0:
+            factors.append(i)
+
+    print factors
+
+    return
 
     prime_factors = []
     
-    for i in possible_prime_factors:
-        if value % i == 0:
+    for i in factors:
+        if is_prime(i):
             prime_factors.append(i)
 
     return prime_factors
