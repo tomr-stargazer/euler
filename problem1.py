@@ -14,10 +14,7 @@ from __future__ import division
 import numpy as np
 
 def sum_multiples_of_3_or_5_below_value(max_value):
-    """
-    Solves the above problem for any "max value".
-
-    """
+    """ Solves the above problem for any "max value". """
 
     multiples = []
 
