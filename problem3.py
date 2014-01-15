@@ -13,78 +13,45 @@ from __future__ import division
 
 import numpy as np
 
-print "This solution is too slow for the input -- see the other one in here."
+# THIS APPROACH WILL BE DIFFERENT.
+# We'll take the big evil number 600851475143
 
-def is_prime(value):
-    """ Checks if current value is prime. Returns True or False. """
+# and hack it down piece by piece.
 
-    if value < 2: raise ValueError
+# first: go through a bunch of numbers. Everytime you hit a divisor:
+#  decimate evilnumber by that value (as many times as is possible) 
+#  and then keep going til you've found all the factors 
+#  (i.e. the decimated number hits one) or you've checked 
+#  every factor up to sqrt(evilnumber).
+#  Then you're left with two numbers: the most recent divisor that worked,
+#  and the decimated number that remained. 
+#  They're both prime factors - return the larger of the two.
+#   (sometimes one of those two is actually 1, 
+#    in which case your input was prime and you're golden.)
+#   (this actually works as a pretty neat prime checker, too!)
 
-    for i in range(2, value):
-        if value % i == 0:
-            return False
-
-    return True
-
-# Revise this - use a sieve!
-def primes_up_to(value):
-    """ 
-    Generates a list of all primes less than or equal to `value`. 
-
-    An implementation of the Sieve of Eratosthenes.
+def find_largest_prime_factor(value):
+    """ Finds the largest prime factor of a given number. """
+    # I think it really works! and is somewhat optimal!
     
-    """
+    current_largest_factor = 1
+    n = 2
 
-    if value < 2: raise ValueError
+    current_value = value
 
-    # Start with two and all the odd numbers.
-    possible_primes = [2] + range(3, value+1, 2)
-    primes = set(possible_primes)
+    while n <= np.sqrt(value) and current_value > 1:
 
-    for i in possible_primes:
+        while current_value % n == 0:
 
-        if i in primes:
+            current_value = current_value//n
+            current_largest_factor = n
+            
+        n += 1
 
-            # Remove all the MULTIPLES of i (but not i itself!)
-            for j in range(2*i, value+1, i):
-                primes.discard(j)
+    return max(current_largest_factor, current_value)
 
-    return primes
+assert find_largest_prime_factor(13195) == 29
 
-def prime_factors_of(value):
-    """ Returns all prime factors of `value`. """
+print find_largest_prime_factor(600851475143)
 
-    # Okay, so we need to "solve" two problems here:
-    # is a given number a factor of `value`?
-    #  and
-    # is a given number PRIME?
-
-    # I think the simplest non-stupid approach is to generate all 
-    # FACTORS OF VALUE, and then check to see which are prime!
-    # actually, a cute approach would be to start from the top down
-    # and just return the first one. we'll see if i need that optimization.
-    # (don't optimize prematurely!)
-
-    # WELP. I tried to generate all primes up to value//2! what a mistake.
-    # or was it? maybe it was just a bad implementation of prime-finding?
-
-    factors = []
-
-    for i in range(2, value//2):
-        if value % i == 0:
-            factors.append(i)
-
-    prime_factors = []
-    
-    for i in factors:
-        if is_prime(i):
-            prime_factors.append(i)
-
-    return prime_factors
-    
-assert set(prime_factors_of(13195)) == set([5, 7, 13, 29])
-assert max(prime_factors_of(13195)) == 29
-
-assert primes_up_to(2) == set([2])
-
-#print max(prime_factors_of(600851475143))
+        
