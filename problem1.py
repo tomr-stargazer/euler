@@ -5,6 +5,8 @@ If we list all the natural numbers below 10 that are multiples of 3 or 5, we get
 
 Find the sum of all the multiples of 3 or 5 below 1000.
 
+http://projecteuler.net/problem=1
+
 """
 
 from __future__ import division
@@ -26,6 +28,7 @@ def sum_multiples_of_3_or_5_below_value(max_value):
             
     return np.sum(multiples)
 
+# Let's use the initial hint as a unit test.
 assert sum_multiples_of_3_or_5_below_value(10) == 23
 
 print sum_multiples_of_3_or_5_below_value(1000)
