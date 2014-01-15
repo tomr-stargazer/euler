@@ -38,15 +38,7 @@ def find_all_palindrome_products_of_digits(digits):
             break
 
     return palindromes
-        
-def find_largest_palindrome_product_of_digits(digits):
-    """ 
-    Finds the largest palindrome product of two `digits`-long numbers. 
 
-    """
+assert max(find_all_palindrome_products_of_digits(2)) == 9009
 
-    return max(find_all_palindrome_products_of_digits(digits))
-
-assert find_largest_palindrome_product_of_digits(2) == 9009
-
-print find_largest_palindrome_product_of_digits(3)
+print max(find_all_palindrome_products_of_digits(3))
