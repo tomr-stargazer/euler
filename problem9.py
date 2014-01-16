@@ -13,29 +13,24 @@ http://projecteuler.net/problem=9
 
 """
 
-# so, the largest value of 'a' can be 332.
-# if we just do a double forloop of all the possible sums of three such digits to 
+def find_pythagorean_triple(abc_sum):
+    """ Finds the pythagorean triple where a+b+c = abc_sum. """
 
-def is_pythagorean_triple(a, b, c):
-    """ Tests whether a given triple is Pythagorean, i.e. obeys a**2+b**2=c**2."""
+    # so, the largest value of 'a' can be is 332.
+    for a in range(abc_sum//3):
+        
+        # smallest possible value of 'b' is a+1,
+        # and the largest value of 'b' is 500 - a/2.
+        for b in range(a + 1, abc_sum//2 - a//2):
 
-    return c**2 == a**2 + b**2
+            c = abc_sum - a - b
 
-for a in range(333):
+            if c**2 == a**2 + b**2:
+                print "a: %d, b: %d, c: %d. Product: %d" % (a, b, c, a*b*c)
+                return a*b*c
 
-    for b in range(a+1, 500-a/2):
 
-        c = 1000 - a - b
-
-        assert c > b
-        assert b > a
-
-        if is_pythagorean_triple(a,b,c):
-            print "a: %d, b: %d, c: %d. Product: %d" % (a, b, c, a*b*c)
-            print "ANSWER ^ "
-
-            print a*b*c
-
+print find_pythagorean_triple(1000)
 
 
         
