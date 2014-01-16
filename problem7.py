@@ -17,6 +17,10 @@ from scipy.optimize import minimize_scalar
 def search_limit_for_k_primes(k):
     """ Gives the ceiling you'll need to search to in order to find k primes. """
 
+    # The Prime Number Theorem shows us that the number of primes P 
+    # lower than N is approximately 
+    # P(n) \approx N / ln(N).    
+
     # This is the deviation from \pi(n) = n / ln(n) -- we want to make it zero.
     pi_deviation = lambda n: np.abs(k - n/np.log(n))
 
@@ -27,12 +31,6 @@ def search_limit_for_k_primes(k):
 
 def kth_prime(k):
     """ Finds the kth prime number. """
-
-    # The Prime Number Theorem shows us that the number of primes P 
-    # lower than N is approximately 
-    # P(n) \approx N / ln(N).
-
-    # So let's do a Sieve to find all the primes below, say, 2*P
 
     search_limit = search_limit_for_k_primes(k)
 
