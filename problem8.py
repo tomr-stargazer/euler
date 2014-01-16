@@ -45,6 +45,4 @@ for i in range(len(number_stripped)):
     if current_product > highest_product:
         highest_product = current_product
 
-        print "%s => %d" % (number_stripped[i:i+5], highest_product)
-
 print highest_product
