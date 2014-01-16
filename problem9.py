@@ -16,12 +16,12 @@ http://projecteuler.net/problem=9
 def find_pythagorean_triple(abc_sum):
     """ Finds the pythagorean triple where a+b+c = abc_sum. """
 
-    # so, the largest value of 'a' can be is 332.
+    # so, the largest value 'a' can be is 332.
     for a in range(abc_sum//3):
         
         # smallest possible value of 'b' is a+1,
-        # and the largest value of 'b' is 500 - a/2.
-        for b in range(a + 1, abc_sum//2 - a//2):
+        # and the largest value of 'b' is (b+c)/2.
+        for b in range(a+1, (abc_sum - a)//2):
 
             c = abc_sum - a - b
 
